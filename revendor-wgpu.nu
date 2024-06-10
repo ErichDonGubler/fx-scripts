@@ -23,13 +23,13 @@ export def main [
 	let old_metadata = (wgpu_repo_pkgs)
 
 	let cmd = "mach"
-	mut args = [vendor --ignore-modified gfx/wgpu_bindings/moz.yaml]
+	mut args = [vendor gfx/wgpu_bindings/moz.yaml]
 	if $revision != null {
 		$args = ($args | append ["--revision" $revision])
 	}
 	let args = $args
-	info "running `mach vendor gfx/wgpu_bindings/moz.yaml`…"
-	let vendor_output = (do { run-external --redirect-combine $cmd ...$args } | complete)
+	info $"running `($args | prepend $cmd | str join ' ')`…"
+	let vendor_output = (run-external --redirect-combine $cmd ...$args | complete)
 	if $vendor_output.exit_code != 0 {
 		error make --unspanned { msg: "failed to re-vendor, bailing" }
 		return;
