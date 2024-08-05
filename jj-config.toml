@@ -8,3 +8,6 @@ trunk() | tags()
 | remote_branches('bookmarks/esr')
 | remote_branches('bookmarks/release')
 '''
+
+[ui]
+default-description = "WIP: Bug ???????: r=TODO"
